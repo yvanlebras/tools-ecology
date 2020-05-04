@@ -61,8 +61,8 @@ filter_absent_species<-function(tab){
     ## Affichage des espèces rejetees  / show species eliminated for the analyses
     if(length(colNull)>0){
         cat("\n",length(colNull)," Species removed from the analysis, abundance is always 0.\n\n",sep="")  #Espèces enlevées de l'analyse car abondance toujours égale a 0\n\n",sep="")
-        #tabNull <- data.frame(Code_espece = colNull, nom_espece = tabsp[colNull,"nom"])
-        #cat("\n\n",sep="")
+        #tabNull <- data.frame(Code_espece = colNull, nom_espece = tab[colNull,"nom"])
+        cat("Removed absent species : \n-",paste(colNull,collapse="\n-"),sep="")
         tab <- tab[,c("carre","annee",colConserve)]
     }
 ################################################################################ FIN DE LA PARTIE ISOLABLE
@@ -117,9 +117,9 @@ filter_rare_species<-function(tab){
     ## affichage des especes retirer de l'analyse / print species that will be deleted
     if(length(colSupr)>0){
         cat("\n",length(colSupr)," Rare species removed from the analysis.\n\n",sep="")
-        #tabSupr <- subset(tabsp,espece %in% colSupr ,select=c("espece","nom"))
+        #tabSupr <- subset(tab,espece %in% colSupr ,select=c("espece","nom"))
         #tabSupr <- tabSupr[order(tabSupr$espece),]
-        #cat("\n\n",sep="")
+        cat("Removed rare species : \n-",paste(colSupr,collapse="\n-"),sep="")
         
     }
     if(length(colConserve)==0) {
