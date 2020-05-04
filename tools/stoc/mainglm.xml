@@ -103,7 +103,7 @@ STOC Estimate species population evolution
 
 **What it does**
 
-Compute and plot evolution of species population, using a glm model.
+Compute and plot evolution of species population, using a glm model of formula : abundance ~ site + year. Testing the effect of site and year on abundance with quasipoisson distribution.
 
 |
 
