@@ -1,0 +1,56 @@
+<tool id="interactive_tool_metashark" tool_type="interactive" name="metashark" version="0.1">
+    <description>Metadata Shiny Automated Resource and Knowledge</description>
+    <requirements>
+        <container type="docker">eliearnaud/metashark</container>
+    </requirements>
+    <entry_points>
+        <entry_point name="metashark visualisation" requires_domain="True">
+            <port>3838</port>
+            <url>/</url>
+        </entry_point>
+    </entry_points>
+    <command><![CDATA[
+        mkdir -p /srv/shiny-server/data/ &&
+        cp '$infile' /srv/shiny-server/data/inputdata.txt &&
+        R -e "options('shiny.port'=3838,shiny.host='0.0.0.0');MetaShARK::runMetashark()"
+    ]]>
+    </command>
+    <inputs>
+        <param name="infile" type="data" format="tabular,csv" label="csv file"/>
+    </inputs>
+    <outputs>
+        <data name="outfile" format="txt" />
+    </outputs>
+    <tests>
+    </tests>
+    <help>
+<![CDATA[
+
+
+`MetaShARK <https://github.com/earnaud/MetaShARK-v2>`_ is a R Shiny App to automate metadata creation in Ecological Metadata Language (E>
+
+Example input file (csv)::
+
+
+"ID"    "x"     "y"     "species"
+
+01      -3.916711      47.868394       loligo vulgaris
+02      -114.58927      35.022485       sepia officinalis
+03      -93.37406       30.00586        thunnus thynnus
+04      -3.895409      47.833036       Lebetus guilleti
+05      -3.895410      47.833050       Lebetus guilleti
+06      -71.098031      42.297408       thunnus thynnus
+07      -110.927215     32.18203        thunnus thynnus
+
+]]>
+    </help>
+    <citations>
+           <citation type="bibtex">@misc{githubsurvey2018,
+           author       = {Elie Arnaud},
+           title        = {{Metadata Shiny Automated Resource and Knowledge}},
+           publisher    = {Github},
+           url          = {https://github.com/earnaud/MetaShARK-v2}
+           }
+          }</citation>
+    </citations>
+</tool>
